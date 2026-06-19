@@ -1,5 +1,24 @@
 import React, { useState } from 'react';
 
+/**
+ * Returns true if the todo is incomplete and its due date is strictly before today's
+ * local date (i.e., it is overdue). Today itself is NOT overdue.
+ *
+ * @param {string|null} dueDate - ISO date string "YYYY-MM-DD" or null
+ * @param {number|boolean} completed - truthy if the todo is completed
+ * @returns {boolean}
+ */
+export function isOverdue(dueDate, completed) {
+  if (!dueDate || completed) return false;
+  const now = new Date();
+  const todayStr = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, '0'),
+    String(now.getDate()).padStart(2, '0'),
+  ].join('-');
+  return dueDate < todayStr;
+}
+
 function TodoCard({ todo, onToggle, onEdit, onDelete, isLoading }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState(todo.title);
@@ -122,6 +141,9 @@ function TodoCard({ todo, onToggle, onEdit, onDelete, isLoading }) {
         {todo.dueDate && (
           <p className="todo-due-date">
             Due: {formatDate(todo.dueDate)}
+            {isOverdue(todo.dueDate, todo.completed) && (
+              <span className="todo-overdue-badge" aria-label="Past Due">⚠ Past Due</span>
+            )}
           </p>
         )}
       </div>

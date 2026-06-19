@@ -567,6 +567,16 @@ p {
   }
 }
 
+/* Overdue Badge */
+.todo-overdue-badge {
+  color: var(--color-warning);
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 /* Focus Visible for keyboard navigation */
 button:focus-visible,
 input:focus-visible,

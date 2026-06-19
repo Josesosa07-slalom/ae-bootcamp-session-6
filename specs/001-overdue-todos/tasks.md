@@ -24,7 +24,7 @@ Backend is unchanged — all tasks target `packages/frontend/`.
 
 **Purpose**: Confirm the existing test suite is green before any changes are introduced.
 
-- [ ] T001 Run existing frontend tests to confirm green baseline: `npm test --workspace=packages/frontend -- --watchAll=false`
+- [X] T001 Run existing frontend tests to confirm green baseline: `npm test --workspace=packages/frontend -- --watchAll=false`
 
 ---
 
@@ -35,8 +35,8 @@ must be in place before any component work begins.
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T002 Add `--color-warning` CSS token to `packages/frontend/src/styles/theme.css` — add `--color-warning: #b45309` under `:root` (light mode) and `--color-warning: #f59e0b` under `[data-theme="dark"]` (dark mode)
-- [ ] T003 [P] Add `.todo-overdue-badge` CSS class to `packages/frontend/src/App.css` — `color: var(--color-warning); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;`
+- [X] T002 Add `--color-warning` CSS token to `packages/frontend/src/styles/theme.css` — add `--color-warning: #b45309` under `:root` (light mode) and `--color-warning: #f59e0b` under `[data-theme="dark"]` (dark mode)
+- [X] T003 [P] Add `.todo-overdue-badge` CSS class to `packages/frontend/src/App.css` — `color: var(--color-warning); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;`
 
 **Checkpoint**: CSS token and badge styles are available — component implementation can now begin.
 
@@ -55,13 +55,13 @@ todo with yesterday's date. Verify only (a) shows the badge.
 
 > **Write these tests FIRST and confirm they FAIL before implementing `isOverdue`.**
 
-- [ ] T004 [P] [US1] Add `isOverdue` unit tests to `packages/frontend/src/components/__tests__/TodoCard.test.js` — use `jest.useFakeTimers()` / `jest.setSystemTime(new Date('2026-06-19'))` and cover: past due date shows badge, today's date shows no badge, future date shows no badge, null dueDate shows no badge (see research.md §3 for mock setup)
+- [X] T004 [P] [US1] Add `isOverdue` unit tests to `packages/frontend/src/components/__tests__/TodoCard.test.js` — use `jest.useFakeTimers()` / `jest.setSystemTime(new Date('2026-06-19'))` and cover: past due date shows badge, today's date shows no badge, future date shows no badge, null dueDate shows no badge (see research.md §3 for mock setup)
 
 ### Implementation for User Story 1
 
-- [ ] T005 [US1] Export `isOverdue(dueDate, completed)` function from `packages/frontend/src/components/TodoCard.js` — implement local-date string comparison as specified in research.md §2 (return false if `!dueDate || completed`; build `todayStr` from local date parts; return `dueDate < todayStr`)
-- [ ] T006 [US1] Add conditional overdue badge JSX to `packages/frontend/src/components/TodoCard.js` — render `<span className="todo-overdue-badge" aria-label="Past Due">⚠ Past Due</span>` immediately after the due date element when `isOverdue(todo.dueDate, todo.completed)` is true
-- [ ] T007 [US1] Verify all US1 tests pass: `npm test --workspace=packages/frontend -- --watchAll=false`
+- [X] T005 [US1] Export `isOverdue(dueDate, completed)` function from `packages/frontend/src/components/TodoCard.js` — implement local-date string comparison as specified in research.md §2 (return false if `!dueDate || completed`; build `todayStr` from local date parts; return `dueDate < todayStr`)
+- [X] T006 [US1] Add conditional overdue badge JSX to `packages/frontend/src/components/TodoCard.js` — render `<span className="todo-overdue-badge" aria-label="Past Due">⚠ Past Due</span>` immediately after the due date element when `isOverdue(todo.dueDate, todo.completed)` is true
+- [X] T007 [US1] Verify all US1 tests pass: `npm test --workspace=packages/frontend -- --watchAll=false`
 
 **Checkpoint**: User Story 1 is fully functional — overdue badge appears for past-due incomplete todos only.
 
@@ -79,8 +79,8 @@ Verify the badge disappears immediately and does not reappear without a page ref
 
 > **Write these tests FIRST and confirm they FAIL (or that coverage is missing) before verifying.**
 
-- [ ] T008 [P] [US2] Add completed-state badge suppression tests to `packages/frontend/src/components/__tests__/TodoCard.test.js` — assert no badge renders when `completed=true` and `dueDate` is yesterday; use fake timers from T004 setup
-- [ ] T009 [US2] Add toggle-to-complete test to `packages/frontend/src/components/__tests__/TodoCard.test.js` — render an overdue todo, simulate marking it complete (update props), assert badge is no longer in the DOM (React derived-state — no separate implementation needed)
+- [X] T008 [P] [US2] Add completed-state badge suppression tests to `packages/frontend/src/components/__tests__/TodoCard.test.js` — assert no badge renders when `completed=true` and `dueDate` is yesterday; use fake timers from T004 setup
+- [X] T009 [US2] Add toggle-to-complete test to `packages/frontend/src/components/__tests__/TodoCard.test.js` — render an overdue todo, simulate marking it complete (update props), assert badge is no longer in the DOM (React derived-state — no separate implementation needed)
 
 **Checkpoint**: User Stories 1 AND 2 are independently testable and passing.
 
@@ -98,7 +98,7 @@ the badge appears. Then update `dueDate` to tomorrow and verify the badge disapp
 
 > **Write these tests FIRST and confirm they FAIL (or that coverage is missing) before verifying.**
 
-- [ ] T010 [US3] Add due-date-edit badge update tests to `packages/frontend/src/components/__tests__/TodoCard.test.js` — render a non-overdue todo and re-render with a past `dueDate` (badge appears); then re-render with a future `dueDate` (badge disappears) — React re-render covers this; no additional implementation needed
+- [X] T010 [US3] Add due-date-edit badge update tests to `packages/frontend/src/components/__tests__/TodoCard.test.js` — render a non-overdue todo and re-render with a past `dueDate` (badge appears); then re-render with a future `dueDate` (badge disappears) — React re-render covers this; no additional implementation needed
 
 **Checkpoint**: All three user stories are independently functional and fully tested.
 
@@ -108,9 +108,9 @@ the badge appears. Then update `dueDate` to tomorrow and verify the badge disapp
 
 **Purpose**: Validate quality, accessibility, and coverage across all user stories.
 
-- [ ] T011 [P] Run ESLint on changed frontend files: `npx eslint packages/frontend/src/components/TodoCard.js packages/frontend/src/styles/theme.css` — fix any reported issues
-- [ ] T012 Verify Jest coverage remains ≥ 80%: `npm test --workspace=packages/frontend -- --watchAll=false --coverage` — check the coverage summary
-- [ ] T013 Run all quickstart.md validation scenarios manually (or via automated test run) — confirm all six scenarios from `specs/001-overdue-todos/quickstart.md` produce the expected results, including the accessibility spot-check (aria-label present, ≥ 4.5:1 contrast in both modes)
+- [X] T011 [P] Run ESLint on changed frontend files: `npx eslint packages/frontend/src/components/TodoCard.js packages/frontend/src/styles/theme.css` — fix any reported issues
+- [X] T012 Verify Jest coverage remains ≥ 80%: `npm test --workspace=packages/frontend -- --watchAll=false --coverage` — check the coverage summary
+- [X] T013 Run all quickstart.md validation scenarios manually (or via automated test run) — confirm all six scenarios from `specs/001-overdue-todos/quickstart.md` produce the expected results, including the accessibility spot-check (aria-label present, ≥ 4.5:1 contrast in both modes)
 
 ---
 
