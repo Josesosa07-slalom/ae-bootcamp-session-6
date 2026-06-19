@@ -27,8 +27,8 @@ that card and not on non-overdue cards.
 
 1. **Given** a todo is incomplete and its due date is before today's date,
    **When** the user views the todo list,
-   **Then** that todo card displays a visible overdue indicator (e.g., a badge, icon, or distinct
-   border/background colour).
+   **Then** that todo card displays a visible overdue indicator — an icon paired with a "Past Due"
+   text label, displayed inline near the due date.
 
 2. **Given** a todo is incomplete and its due date is today or in the future,
    **When** the user views the todo list,
@@ -114,10 +114,11 @@ verifying the overdue indicator is removed, then setting it to yesterday and ver
   and must not be confused with the existing delete (danger) or success colour states.
 - **FR-007**: The overdue indicator MUST meet WCAG AA colour contrast requirements in both
   light mode and dark mode.
-- **FR-008**: The overdue indicator MUST include a non-colour cue (e.g., text label, icon, or
-  pattern) so that users with colour vision deficiencies can identify overdue items.
+- **FR-008**: The overdue indicator MUST include a non-colour cue — specifically, a "Past Due"
+  text label — so that users with colour vision deficiencies can identify overdue items.
 - **FR-009**: The overdue indicator MUST be consistent with the existing Halloween design theme
-  colour palette and spacing conventions.
+  colour palette and spacing conventions, using a new amber/orange warning colour token
+  (e.g., `--color-warning`) that is distinct from the existing Danger and Success entries.
 
 ### Key Entities
 
@@ -150,8 +151,17 @@ verifying the overdue indicator is removed, then setting it to yesterday and ver
   the date shown to the user in the due date field.
 - The feature is purely a visual enhancement; no new server-side logic, data storage, or API
   endpoints are needed.
-- The existing Halloween design theme provides appropriate colours (e.g., the Danger palette
-  entry) that can be used or adapted for the overdue indicator, provided contrast requirements
-  are met.
+- A new amber/orange warning colour token (e.g., `--color-warning`) will be added to the
+  Halloween design theme for the overdue indicator, deliberately distinct from the existing
+  Danger (red) and Success (green) entries to satisfy FR-006. It MUST meet the WCAG AA
+  contrast ratio in both light and dark modes.
 - Completed todos that are past their due date represent finished work and should not surface
   as overdue in any view.
+
+## Clarifications
+
+### Session 2026-06-19
+
+- Q: What should be the primary visual form of the overdue indicator on the todo card? → A: Icon + text label inline near the due date
+- Q: What text label should the overdue indicator display alongside the icon? → A: "Past Due"
+- Q: What color approach should be used for the overdue indicator? → A: New amber/orange CSS token (e.g., `--color-warning`) distinct from Danger red
